@@ -1,0 +1,80 @@
+#compdef sysbench
+
+# Copyright (C) 2020  <name of copyright holder>
+# Author: Paul Seyfert <pseyfert.mathphys@gmail.com>
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License
+# as published by the Free Software Foundation; either version 2
+# of the License, or (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+
+_arguments \
+  "--threads=[number of threads to use (1)]:NUMBER OF THREADS" \
+  "--events=[limit for total number of events (0)]:NUMBER OF EVENTS" \
+  "--time=[limit for total execution time in seconds (10)]:SECONDS" \
+  "--forced-shutdown=[number of seconds to wait after the --time limit before forcing shutdown, or 'off' to disable (off)]:SECONDS OR \"off\"" \
+  "--thread-stack-size=[size of stack per thread (64K)]:SIZE" \
+  "--rate=[average transactions rate. 0 for unlimited rate (0)]:TRANSACTION RATE" \
+  "--report-interval=[periodically report intermediate statistics with a specified interval in seconds. 0 disables intermediate reports (0)]:SECONDS" \
+  "--report-checkpoints=[dump full statistics and reset all counters at specified points in time. The argument is a list of comma-separated values representing the amount of time in seconds elapsed from start of test when report checkpoint(s) must be performed. Report checkpoints are off by default. ()]:LIST" \
+  "--debug=[print more debugging info (off)]:BOOL:(on off)" \
+  "--validate=[perform validation checks where possible (off)]:BOOL:(on off)" \
+  "--verbosity=[verbosity level (5 - debug, 0 - only critical messages) (3)]:LEVEL:((0:\"only critical\" 1 2 3 4 5:\"debug\"))" \
+  "--percentile=[percentile to calculate in latency statistics (1-100). Use the special value of 0 to disable percentile calculations (95)]:PERCENTILE" \
+  "--histogram=[print latency histogram in report (off)]:BOOL:(on off)" \
+  "--rand-type=[random numbers distribution]:RANDOM NUMBER DISTRIBUTION:(uniform gaussian special pareto)" \
+  "--rand-spec-iter=[number of iterations used for numbers generation (12)]:NUMBER" \
+  "--rand-spec-pct=[percentage of values to be treated as 'special' (for special distribution) (1)]:PERCENTAGE" \
+  "--rand-spec-res=[percentage of 'special' values to use (for special distribution) (75)]:PERCENTAGE" \
+  "--rand-seed=[seed for random number generator. When 0, the current time is used as a RNG seed.]:NUMBER" \
+  "--rand-pareto-h=[parameter h for pareto distribution (0.2)]:NUMBER]" \
+  "(: -)--help[print help and exit]" \
+  "(: -)--version[print version and exit]" \
+  "--config-file=[File containing command line options]:FILENAME: _files" \
+  "1:testname:(fileio cpu memory threads mutex)" \
+  "2:command:((help:\"display usage information\" prepare:\"perform preparative actions for some tests\" run:\"run the test\" cleanup:\"remove temporary files\"))"
+
+# TODO: can one get these automatically?
+# Compiled-in tests:
+#   fileio - File I/O test
+#   cpu - CPU performance test
+#   memory - Memory functions speed test
+#   threads - Threads subsystem performance test
+#   mutex - Mutex performance test
+
+# TODO each test brings their own options (shown in --help)
+
+
+  # "--db-driver=[specifies database driver to use ('help' to get list of available drivers) (mysql)]:DRIVER:(mysql pgsql help)" \
+  # "--db-ps-mode=[prepared statements usage mode (auto)]:MODE:(auto disable)" \
+  # "--db-debug=[print database-specific debug information (off)]:BOOL:(on off)" \
+# mysql options:
+#   --mysql-host=[LIST,...]          MySQL server host [localhost]
+#   --mysql-port=[LIST,...]          MySQL server port [3306]
+#   --mysql-socket=[LIST,...]        MySQL socket
+#   --mysql-user=STRING              MySQL user [sbtest]
+#   --mysql-password=STRING          MySQL password []
+#   --mysql-db=STRING                MySQL database name [sbtest]
+#   --mysql-ssl[=on|off]             use SSL connections, if available in the client library [off]
+#   --mysql-ssl-cipher=STRING        use specific cipher for SSL connections []
+#   --mysql-compression[=on|off]     use compression, if available in the client library [off]
+#   --mysql-debug[=on|off]           trace all client library calls [off]
+#   --mysql-ignore-errors=[LIST,...] list of errors to ignore, or "all" [1213,1020,1205]
+#   --mysql-dry-run[=on|off]         Dry run, pretend that all MySQL client API calls are successful without executing them [off]
+#
+# pgsql options:
+#   --pgsql-host=STRING     PostgreSQL server host [localhost]
+#   --pgsql-port=N          PostgreSQL server port [5432]
+#   --pgsql-user=STRING     PostgreSQL user [sbtest]
+#   --pgsql-password=STRING PostgreSQL password []
+#   --pgsql-db=STRING       PostgreSQL database name [sbtest]
